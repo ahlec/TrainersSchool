@@ -1,0 +1,88 @@
+﻿<UserControl x:Class="TrainersSchool.Views.SessionView"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:viewModels="clr-namespace:TrainersSchool.ViewModels"
+			 xmlns:converters="clr-namespace:TrainersSchool.Converters"
+			 xmlns:pokemon="clr-namespace:TrainersSchool.Pokemon">
+	<UserControl.DataContext>
+		<viewModels:SessionViewModel />
+	</UserControl.DataContext>
+
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="200" />
+		</Grid.ColumnDefinitions>
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*" />
+			<RowDefinition Height="20" />
+		</Grid.RowDefinitions>
+
+
+		<StackPanel Background="Green">
+			<Button Command="{Binding SubmitAnswerCommand}"
+					CommandParameter="{x:Static pokemon:Effectiveness.Half}">Quarter</Button>
+			<Button Command="{Binding SubmitAnswerCommand}"
+					CommandParameter="{x:Static pokemon:Effectiveness.Normal}">Normal</Button>
+			<Button Command="{Binding SubmitAnswerCommand}"
+					CommandParameter="{x:Static pokemon:Effectiveness.Double}">Double</Button>
+		</StackPanel>
+		
+		
+		
+		
+		
+		
+
+		<Border Grid.Row="1"
+				Grid.Column="0"
+				Grid.ColumnSpan="2"
+				Background="Teal"
+				BorderThickness="0,1,0,0">
+			<Border.Visibility>
+				<Binding Path="NumberQuestionsAnswered">
+					<Binding.Converter>
+						<converters:CompositeConverter>
+							<converters:IsInt32EqualConverter NumberToEqual="0" />
+							<converters:InvertBooleanConverter />
+							<BooleanToVisibilityConverter />
+						</converters:CompositeConverter>
+					</Binding.Converter>
+				</Binding>
+			</Border.Visibility>
+			
+			<StackPanel Orientation="Horizontal"
+						HorizontalAlignment="Center">
+				<StackPanel.Resources>
+					<Style TargetType="Label">
+						<Setter Property="FontSize"
+								Value="10" />
+						<Setter Property="Padding"
+								Value="0" />
+						<Setter Property="VerticalContentAlignment"
+								Value="Center" />
+					</Style>
+
+					<converters:PercentageConverter x:Key="PercentageConverter" />
+				</StackPanel.Resources>
+
+				<Label Margin="0,0,7,0">Score:</Label>
+				<Label Content="{Binding NumberAnswersCorrect}" />
+				<Label>/</Label>
+				<Label Content="{Binding NumberQuestionsAnswered}" />
+
+				<Label Margin="4,0,0,0">(</Label>
+				<Label>
+					<Label.Content>
+						<MultiBinding Converter="{StaticResource PercentageConverter}">
+							<Binding Path="NumberAnswersCorrect" />
+							<Binding Path="NumberQuestionsAnswered" />
+						</MultiBinding>
+					</Label.Content>
+				</Label>
+				<Label>%)</Label>
+			</StackPanel>
+		</Border>
+	</Grid>
+</UserControl>
