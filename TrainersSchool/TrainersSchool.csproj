@@ -60,6 +60,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Command.cs" />
+    <Compile Include="Controls\TypeIcon.xaml.cs">
+      <DependentUpon>TypeIcon.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\CompositeConverter.cs" />
     <Compile Include="Converters\InvertBooleanConverter.cs" />
     <Compile Include="Converters\IsInt32EqualConverter.cs" />
@@ -69,6 +72,10 @@
     <Compile Include="Views\SessionView.xaml.cs">
       <DependentUpon>SessionView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\TypeIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -116,6 +123,9 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <Resource Include="Resources\Pokemon DPPt.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
