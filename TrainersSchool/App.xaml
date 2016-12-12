@@ -4,6 +4,20 @@
              xmlns:local="clr-namespace:TrainersSchool"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
-    </Application.Resources>
+		<Style TargetType="TextBlock"
+			   x:Key="GlobalTextBlockStyle">
+			<Setter Property="FontFamily"
+					Value="/TrainersSchool;component/Resources/#Pokemon DPPt" />
+			<Setter Property="Foreground"
+					Value="White" />
+			<!--<Setter Property="Effect">
+				<Setter.Value>
+					<DropShadowEffect ShadowDepth="1"
+									  Direction="330"
+									  Color="#707878"
+									  BlurRadius="1" />
+				</Setter.Value>
+			</Setter>-->
+		</Style>
+	</Application.Resources>
 </Application>

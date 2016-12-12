@@ -64,9 +64,12 @@
       <DependentUpon>TypeIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\CompositeConverter.cs" />
+    <Compile Include="Converters\EnumToStringConverter.cs" />
     <Compile Include="Converters\InvertBooleanConverter.cs" />
     <Compile Include="Converters\IsInt32EqualConverter.cs" />
     <Compile Include="Converters\PercentageConverter.cs" />
+    <Compile Include="Converters\ToUpperConverter.cs" />
+    <Compile Include="ViewModels\Components\QuestionAndAnswer.cs" />
     <Compile Include="ViewModels\SessionViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
     <Compile Include="Views\SessionView.xaml.cs">

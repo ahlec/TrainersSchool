@@ -2,22 +2,29 @@
 			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:viewModels="clr-namespace:TrainersSchool.ViewModels"
+			 xmlns:components="clr-namespace:TrainersSchool.ViewModels.Components"
 			 xmlns:controls="clr-namespace:TrainersSchool.Controls"
 			 xmlns:converters="clr-namespace:TrainersSchool.Converters"
-			 xmlns:pokemon="clr-namespace:TrainersSchool.Pokemon">
+			 xmlns:pokemon="clr-namespace:TrainersSchool.Pokemon"
+			 Background="#008080"
+			 SnapsToDevicePixels="True">
 	<UserControl.DataContext>
 		<viewModels:SessionViewModel />
 	</UserControl.DataContext>
 
-	<Grid>
+	<UserControl.Resources>
+		<converters:EnumToStringConverter x:Key="EnumToStringConverter" />
+	</UserControl.Resources>
+
+	<Grid SnapsToDevicePixels="True">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="200" />
+			<ColumnDefinition Width="140" />
 		</Grid.ColumnDefinitions>
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*" />
-			<RowDefinition Height="20" />
+			<RowDefinition Height="46" />
 		</Grid.RowDefinitions>
 
 
@@ -31,61 +38,151 @@
 		</StackPanel>
 
 -->
+		<Grid Grid.Row="0"
+			  Grid.Column="0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="20" />
+				<RowDefinition Height="2*" />
+				<RowDefinition Height="1*" />
+				<RowDefinition Height="2*" />
+				<RowDefinition Height="20" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
 
-		<controls:TypeIcon Type="Water" />
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
 
+			<controls:TypeIcon Grid.Row="1"
+							   Grid.Column="0"
+							   Grid.ColumnSpan="4"
+							   Type="{Binding CurrentQuestion.AttackingType}" />
 
+			<Label Grid.Row="2"
+				   Grid.Column="0"
+				   Grid.ColumnSpan="4"
+				   HorizontalContentAlignment="Center"
+				   VerticalContentAlignment="Center">x</Label>
+			
+			<controls:TypeIcon Grid.Row="3"
+							   Grid.Column="0"
+							   Grid.ColumnSpan="4"
+							   Type="{Binding CurrentQuestion.DefendingType}" />
 
+			<Button Grid.Row="4"
+					Grid.Column="0"
+					Command="{Binding SubmitAnswerCommand}"
+					CommandParameter="{x:Static pokemon:Effectiveness.None}"
+					Content="{Binding Source={x:Static pokemon:Effectiveness.None}, Converter={StaticResource EnumToStringConverter}}" />
 
+			<Button Grid.Row="4"
+					Grid.Column="1"
+					Command="{Binding SubmitAnswerCommand}"
+					CommandParameter="{x:Static pokemon:Effectiveness.Half}"
+					Content="{Binding Source={x:Static pokemon:Effectiveness.Half}, Converter={StaticResource EnumToStringConverter}}" />
 
-		<Border Grid.Row="1"
+			<Button Grid.Row="4"
+					Grid.Column="2"
+					Command="{Binding SubmitAnswerCommand}"
+					CommandParameter="{x:Static pokemon:Effectiveness.Normal}"
+					Content="{Binding Source={x:Static pokemon:Effectiveness.Normal}, Converter={StaticResource EnumToStringConverter}}" />
+
+			<Button Grid.Row="4"
+					Grid.Column="3"
+					Command="{Binding SubmitAnswerCommand}"
+					CommandParameter="{x:Static pokemon:Effectiveness.Double}"
+					Content="{Binding Source={x:Static pokemon:Effectiveness.Double}, Converter={StaticResource EnumToStringConverter}}" />
+		</Grid>
+
+		<Border x:Name="BottomBar"
+				Grid.Row="1"
 				Grid.Column="0"
-				Grid.ColumnSpan="2"
-				Background="Teal"
-				BorderThickness="0,1,0,0">
-			<Border.Visibility>
-				<Binding Path="NumberQuestionsAnswered">
-					<Binding.Converter>
-						<converters:CompositeConverter>
-							<converters:IsInt32EqualConverter NumberToEqual="0" />
-							<converters:InvertBooleanConverter />
-							<BooleanToVisibilityConverter />
-						</converters:CompositeConverter>
-					</Binding.Converter>
-				</Binding>
-			</Border.Visibility>
+				Background="#5068e8"
+				BorderBrush="#505050"
+				BorderThickness="0,2,0,0"
+				SnapsToDevicePixels="True">
+			<Border BorderThickness="0,1,0,0"
+					BorderBrush="#a8b8f0"
+					SnapsToDevicePixels="True">
+				<Grid>
+					<Grid.Resources>
+						<Style TargetType="TextBlock"
+							   BasedOn="{StaticResource GlobalTextBlockStyle}">
+							<Setter Property="FontSize"
+									Value="20" />
+							<Setter Property="Padding"
+									Value="0" />
+							<Setter Property="VerticalAlignment"
+									Value="Top" />
+						</Style>
 
-			<StackPanel Orientation="Horizontal"
-						HorizontalAlignment="Center">
-				<StackPanel.Resources>
-					<Style TargetType="Label">
-						<Setter Property="FontSize"
-								Value="10" />
-						<Setter Property="Padding"
-								Value="0" />
-						<Setter Property="VerticalContentAlignment"
-								Value="Center" />
-					</Style>
+						<converters:PercentageConverter x:Key="PercentageConverter" />
+					</Grid.Resources>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="3" />
+						<RowDefinition Height="4" />
+						<RowDefinition Height="*" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="3" />
+						<ColumnDefinition Width="4" />
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="4" />
+						<ColumnDefinition Width="3" />
+					</Grid.ColumnDefinitions>
 
-					<converters:PercentageConverter x:Key="PercentageConverter" />
-				</StackPanel.Resources>
+					<Rectangle Grid.Row="1"
+							   Grid.Column="1"
+							   Fill="#3040b8" />
 
-				<Label Margin="0,0,7,0">Score:</Label>
-				<Label Content="{Binding NumberAnswersCorrect}" />
-				<Label>/</Label>
-				<Label Content="{Binding NumberQuestionsAnswered}" />
+					<StackPanel Grid.Row="2"
+								Grid.Column="2"
+								Orientation="Horizontal">
+						<TextBlock Margin="0,0,7,0">Score:</TextBlock>
+						<TextBlock Text="{Binding NumberAnswersCorrect}" />
+						<TextBlock>/</TextBlock>
+						<TextBlock Text="{Binding NumberQuestionsAnswered}" />
 
-				<Label Margin="4,0,0,0">(</Label>
-				<Label>
-					<Label.Content>
-						<MultiBinding Converter="{StaticResource PercentageConverter}">
-							<Binding Path="NumberAnswersCorrect" />
-							<Binding Path="NumberQuestionsAnswered" />
-						</MultiBinding>
-					</Label.Content>
-				</Label>
-				<Label>%)</Label>
-			</StackPanel>
+						<TextBlock Margin="4,0,0,0">(</TextBlock>
+						<TextBlock>
+							<TextBlock.Text>
+								<MultiBinding Converter="{StaticResource PercentageConverter}">
+									<Binding Path="NumberAnswersCorrect" />
+									<Binding Path="NumberQuestionsAnswered" />
+								</MultiBinding>
+							</TextBlock.Text>
+						</TextBlock>
+						<TextBlock>%)</TextBlock>
+					</StackPanel>
+
+					<Rectangle Grid.Row="1"
+							   Grid.Column="3"
+							   Fill="#3040b8" />
+				</Grid>
+			</Border>
+		</Border>
+
+		<Border x:Name="Sidebar"
+				Grid.Row="0"
+				Grid.RowSpan="2"
+				Grid.Column="1"
+				Background="#7890e0"
+				BorderBrush="#3040b8"
+				BorderThickness="2,0,0,0"
+				SnapsToDevicePixels="True">
+			<Border BorderBrush="#a8b8f0"
+					BorderThickness="1,0,0,0">
+				<ItemsControl ItemsSource="{Binding AnswerHistory}">
+					<ItemsControl.ItemTemplate>
+						<DataTemplate DataType="components:QuestionAndAnswer">
+							<Label Content="{Binding AttackingType}" />
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
+			</Border>
 		</Border>
 	</Grid>
 </UserControl>

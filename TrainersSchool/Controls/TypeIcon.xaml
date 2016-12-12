@@ -1,76 +1,41 @@
 ﻿<UserControl x:Class="TrainersSchool.Controls.TypeIcon"
 			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:converters="clr-namespace:TrainersSchool.Converters"
 			 xmlns:local="clr-namespace:TrainersSchool.Controls"
 			 x:Name="TypeIconControl">
 	<UserControl.Resources>
 		<local:TypeToBrushConverter x:Key="TypeToBackgroundColorConverter"
 									NormalBrush="#b8b8a8"
 									FightingBrush="#f87070"
-									PoisonBrush=""
-									GroundBrush=""
-									RockBrush=""
-									BugBrush=""
-									GhostBrush=""
-									SteelBrush=""
+									
 									FireBrush="#f89030"
 									WaterBrush="#6898F8"
-									GrassBrush="#90e880"
-									ElectricBrush=""
-									PsychicBrush=""
-									IceBrush=""
-									DragonBrush=""
-									DarkBrush=""
-									FairyBrush="">
+									GrassBrush="#90e880">
 			<local:TypeToBrushConverter.FlyingBrush>
-				<LinearGradientBrush>
-					
+				<LinearGradientBrush EndPoint="0,1">
+					<GradientStop Color="#58C8F0"
+								  Offset="0" />
+					<GradientStop Color="#58C8F0"
+								  Offset="0.5" />
+					<GradientStop Color="#b8b8a8"
+								  Offset="0.5" />
 				</LinearGradientBrush>
 			</local:TypeToBrushConverter.FlyingBrush>
 		</local:TypeToBrushConverter>
 
-		<local:TypeToBrushConverter x:Key="TypeToDarkColorConverter"
-									NormalBrush="#989078"
-									FightingBrush="#d04040"
-									FlyingBrush="#989078"
-									PoisonBrush=""
-									GroundBrush=""
-									RockBrush=""
-									BugBrush=""
-									GhostBrush=""
-									SteelBrush=""
-									FireBrush="#c06820"
-									WaterBrush="#3070c0"
-									GrassBrush="#58b848"
-									ElectricBrush=""
-									PsychicBrush=""
-									IceBrush=""
-									DragonBrush=""
-									DarkBrush=""
-									FairyBrush="" />
-
-		<local:TypeToBrushConverter x:Key="TypeToLightColorConverter"
-									NormalBrush="#e8e8d8"
-									FightingBrush="#f8a8a8"
-									FlyingBrush="#b8e8f8"
-									PoisonBrush=""
-									GroundBrush=""
-									RockBrush=""
-									BugBrush=""
-									GhostBrush=""
-									SteelBrush=""
-									FireBrush="#f8c090"
-									WaterBrush="#c8d8f8"
-									GrassBrush="#d8f0c0"
-									ElectricBrush=""
-									PsychicBrush=""
-									IceBrush=""
-									DragonBrush=""
-									DarkBrush=""
-									FairyBrush="" />
-
 		<SolidColorBrush x:Key="BorderColor"
 						 Color="#586060" />
+
+		<SolidColorBrush x:Key="DarkBorderOverlay"
+						 Color="Black"
+						 Opacity="0.226" />
+
+		<SolidColorBrush x:Key="LightBorderOverlay"
+						 Color="White"
+						 Opacity="0.57" />
+
+		<converters:ToUpperConverter x:Key="ToUpperConverter" />
 	</UserControl.Resources>
 
 	<Viewbox Stretch="Uniform">
@@ -103,22 +68,22 @@
 			<Rectangle x:Name="DarkBorderBottom"
 					   Grid.Row="3"
 					   Grid.Column="2"
-					   Fill="{Binding Type, ElementName=TypeIconControl, Converter={StaticResource TypeToDarkColorConverter}}" />
+					   Fill="{StaticResource DarkBorderOverlay}" />
 
 			<Rectangle x:Name="DarkBorderRight"
 					   Grid.Row="2"
 					   Grid.Column="3"
-					   Fill="{Binding Type, ElementName=TypeIconControl, Converter={StaticResource TypeToDarkColorConverter}}" />
+					   Fill="{StaticResource DarkBorderOverlay}" />
 
 			<Rectangle x:Name="LightBorderTop"
 					   Grid.Row="1"
 					   Grid.Column="2"
-					   Fill="{Binding Type, ElementName=TypeIconControl, Converter={StaticResource TypeToLightColorConverter}}" />
+					   Fill="{StaticResource LightBorderOverlay}" />
 
 			<Rectangle x:Name="LightBorderLeft"
 					   Grid.Row="2"
 					   Grid.Column="1"
-					   Fill="{Binding Type, ElementName=TypeIconControl, Converter={StaticResource TypeToLightColorConverter}}" />
+					   Fill="{StaticResource LightBorderOverlay}" />
 
 			<Rectangle x:Name="TopLeftWhitePixel"
 					   Grid.Row="1"
@@ -163,7 +128,7 @@
 					   Margin="1,1,0,0"
 					   Width="1"
 					   Height="1"
-					   Fill="{Binding Type, ElementName=TypeIconControl, Converter={StaticResource TypeToDarkColorConverter}}" />
+					   Fill="{StaticResource DarkBorderOverlay}" />
 
 			<Rectangle x:Name="TopRightColorDot"
 					   Grid.Column="2"
@@ -173,7 +138,7 @@
 					   Margin="0,1,1,0"
 					   Width="1"
 					   Height="1"
-					   Fill="{Binding Type, ElementName=TypeIconControl, Converter={StaticResource TypeToDarkColorConverter}}" />
+					   Fill="{StaticResource DarkBorderOverlay}" />
 
 			<Rectangle x:Name="BottomRightColorDot"
 					   Grid.Column="2"
@@ -183,7 +148,7 @@
 					   Margin="0,0,1,1"
 					   Width="1"
 					   Height="1"
-					   Fill="{Binding Type, ElementName=TypeIconControl, Converter={StaticResource TypeToDarkColorConverter}}" />
+					   Fill="{StaticResource DarkBorderOverlay}" />
 
 			<Rectangle x:Name="BottomLeftColorDot"
 					   Grid.Column="2"
@@ -193,11 +158,11 @@
 					   Margin="1,0,0,1"
 					   Width="1"
 					   Height="1"
-					   Fill="{Binding Type, ElementName=TypeIconControl, Converter={StaticResource TypeToDarkColorConverter}}" />
+					   Fill="{StaticResource DarkBorderOverlay}" />
 
 			<TextBlock Grid.Row="2"
 					   Grid.Column="2"
-					   Text="{Binding Type, ElementName=TypeIconControl}"
+					   Text="{Binding Type, ElementName=TypeIconControl, Converter={StaticResource ToUpperConverter}}"
 					   Foreground="White"
 					   FontFamily="/TrainersSchool;component/Resources/#Pokemon DPPt"
 					   FontWeight="Bold"
