@@ -6,12 +6,31 @@
 			 x:Name="TypeIconControl">
 	<UserControl.Resources>
 		<local:TypeToBrushConverter x:Key="TypeToBackgroundColorConverter"
-									NormalBrush="#b8b8a8"
+									BugBrush="#a0c888"
+									DarkBrush="#908888"
+									ElectricBrush="#e0e000"
+									FairyBrush="#ff65d5"
 									FightingBrush="#f87070"
-									
 									FireBrush="#f89030"
-									WaterBrush="#6898F8"
-									GrassBrush="#90e880">
+									GhostBrush="#a870f8"
+									GrassBrush="#90e880"
+									IceBrush="#30d8d0"
+									NormalBrush="#b8b8a8"
+									PoisonBrush="#e090f8"
+									PsychicBrush="#f838a8"
+									RockBrush="#c8a048"
+									SteelBrush="#b8b8d0"
+									WaterBrush="#6898F8">
+			<local:TypeToBrushConverter.DragonBrush>
+				<LinearGradientBrush EndPoint="0,1">
+					<GradientStop Color="#6898f8"
+								  Offset="0" />
+					<GradientStop Color="#6898f8"
+								  Offset="0.5" />
+					<GradientStop Color="#f87070"
+								  Offset="0.5" />
+				</LinearGradientBrush>
+			</local:TypeToBrushConverter.DragonBrush>
 			<local:TypeToBrushConverter.FlyingBrush>
 				<LinearGradientBrush EndPoint="0,1">
 					<GradientStop Color="#58C8F0"
@@ -22,6 +41,16 @@
 								  Offset="0.5" />
 				</LinearGradientBrush>
 			</local:TypeToBrushConverter.FlyingBrush>
+			<local:TypeToBrushConverter.GroundBrush>
+				<LinearGradientBrush EndPoint="0,1">
+					<GradientStop Color="#e0e000"
+								  Offset="0" />
+					<GradientStop Color="#e0e000"
+								  Offset="0.5" />
+					<GradientStop Color="#c8a048"
+								  Offset="0.5" />
+				</LinearGradientBrush>
+			</local:TypeToBrushConverter.GroundBrush>
 		</local:TypeToBrushConverter>
 
 		<SolidColorBrush x:Key="BorderColor"

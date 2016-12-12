@@ -14,6 +14,10 @@
 
 	<UserControl.Resources>
 		<converters:EnumToStringConverter x:Key="EnumToStringConverter" />
+		<converters:CompositeConverter x:Key="InvertedBooleanToVisibilityConverter">
+			<converters:InvertBooleanConverter />
+			<BooleanToVisibilityConverter />
+		</converters:CompositeConverter>
 	</UserControl.Resources>
 
 	<Grid SnapsToDevicePixels="True">
@@ -175,10 +179,45 @@
 				SnapsToDevicePixels="True">
 			<Border BorderBrush="#a8b8f0"
 					BorderThickness="1,0,0,0">
-				<ItemsControl ItemsSource="{Binding AnswerHistory}">
+				<ItemsControl ItemsSource="{Binding AnswerHistory}"
+							  SnapsToDevicePixels="True">
 					<ItemsControl.ItemTemplate>
 						<DataTemplate DataType="components:QuestionAndAnswer">
-							<Label Content="{Binding AttackingType}" />
+							<Border BorderThickness="0,1,0,0"
+									BorderBrush="Black"
+									Padding="3"
+									SnapsToDevicePixels="True">
+								<Grid SnapsToDevicePixels="True">
+									<Grid.RowDefinitions>
+										<RowDefinition Height="*" />
+										<RowDefinition Height="*" />
+										<RowDefinition Height="*" />
+									</Grid.RowDefinitions>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="*" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+
+									<controls:TypeIcon Grid.Row="0"
+													   Grid.Column="0"
+													   Type="{Binding AttackingType}" />
+									<TextBlock Grid.Row="1"
+											   Grid.Column="0"
+											   Text="x" />
+									<controls:TypeIcon Grid.Row="1"
+													   Grid.Column="1"
+													   Type="{Binding DefendingType}" />
+
+									<TextBlock Grid.Row="2"
+											   Grid.Column="0"
+											   Text="{Binding SubmittedAnswer, Converter={StaticResource EnumToStringConverter}}"
+											   Visibility="{Binding WasUserCorrect, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
+
+									<TextBlock Grid.Row="2"
+											   Grid.Column="1"
+											   Text="{Binding CorrectAnswer, Converter={StaticResource EnumToStringConverter}}" />
+								</Grid>
+							</Border>
 						</DataTemplate>
 					</ItemsControl.ItemTemplate>
 				</ItemsControl>

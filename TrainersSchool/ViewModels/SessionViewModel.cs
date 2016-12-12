@@ -61,7 +61,7 @@ namespace TrainersSchool.ViewModels
 
 			NumberQuestionsAnswered++;
 
-			AnswerHistory = AnswerHistory.Add( question );
+			AnswerHistory = AnswerHistory.Insert( 0, question );
 			CurrentQuestion = SelectNextQuestion();
 		}
 
