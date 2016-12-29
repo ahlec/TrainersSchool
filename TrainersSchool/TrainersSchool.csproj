@@ -70,6 +70,7 @@
     <Compile Include="Converters\IsInt32EqualConverter.cs" />
     <Compile Include="Converters\PercentageConverter.cs" />
     <Compile Include="Converters\ToUpperConverter.cs" />
+    <Compile Include="Pokemon\Interfaces.cs" />
     <Compile Include="ViewModels\Components\QuestionAndAnswer.cs" />
     <Compile Include="ViewModels\SessionViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />

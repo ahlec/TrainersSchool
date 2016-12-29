@@ -24,7 +24,10 @@ namespace TrainersSchool.ViewModels.Components
 			AttackingType = attackingType;
 			DefendingType = defendingType;
 			Generation = generation;
-			CorrectAnswer = PokemonTypeUtils.GetEffectivenessAgainst( attackingType, defendingType, generation );
+
+			String hardcodedMnemonic;
+			CorrectAnswer = PokemonTypeUtils.GetEffectivenessAgainst( attackingType, defendingType, generation, out hardcodedMnemonic );
+			Mnemonic = hardcodedMnemonic;
 		}
 
 		public PokemonType AttackingType { get; }
@@ -36,6 +39,8 @@ namespace TrainersSchool.ViewModels.Components
 		public Generation Generation { get; }
 
 		public Effectiveness CorrectAnswer { get; }
+
+		public String Mnemonic { get; }
 
 		public Effectiveness SubmittedAnswer { get; set; }
 
