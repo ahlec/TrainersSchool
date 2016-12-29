@@ -146,7 +146,7 @@ namespace TrainersSchool.Pokemon
 			return matchup;
 		}
 
-		public static readonly ImmutableDictionary<Int32, ITypeMatchup> TypeMatchups = new HashSet<ITypeMatchup>
+		private static readonly ImmutableDictionary<Int32, ITypeMatchup> TypeMatchups = new HashSet<ITypeMatchup>
 		{
 			new TypeMatchup( PokemonType.Normal, PokemonType.Ghost, Effectiveness.None, "Different planes of existence" ),
 			new TypeMatchup( PokemonType.Normal, PokemonType.Rock, Effectiveness.Half, "" ),
