@@ -6,8 +6,13 @@
 			 xmlns:controls="clr-namespace:TrainersSchool.Controls"
 			 xmlns:converters="clr-namespace:TrainersSchool.Converters"
 			 xmlns:pokemon="clr-namespace:TrainersSchool.Pokemon"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 Background="#008080"
-			 SnapsToDevicePixels="True">
+			 SnapsToDevicePixels="True"
+			 mc:Ignorable="d"
+			 d:DesignHeight="700"
+			 d:DesignWidth="1000">
 	<UserControl.DataContext>
 		<viewModels:SessionViewModel />
 	</UserControl.DataContext>
@@ -23,67 +28,37 @@
 											FalseBrush="Red" />
 	</UserControl.Resources>
 
-	<Grid SnapsToDevicePixels="True">
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="140" />
-		</Grid.ColumnDefinitions>
-
+	<Grid SnapsToDevicePixels="True"
+		  Margin="20">
 		<Grid.RowDefinitions>
-			<RowDefinition Height="22" />
+			<RowDefinition Height="100" />
+			<RowDefinition Height="100" />
+			<RowDefinition Height="20" />
+			<RowDefinition Height="80" />
 			<RowDefinition Height="*" />
 			<RowDefinition Height="46" />
 		</Grid.RowDefinitions>
 
-		<Border x:Name="TopBar"
-				Grid.Row="0"
-				Grid.Column="0"
-				Background="#5068e8"
-				BorderBrush="#505050"
-				BorderThickness="0,0,0,2"
-				SnapsToDevicePixels="True">
-			<Border BorderThickness="0,0,0,1"
-					BorderBrush="#a8b8f0"
-					SnapsToDevicePixels="True">
-				<Border Background="#70c0f8"
-						BorderBrush="#505050"
-						BorderThickness="1"
-						Height="15"
-						CornerRadius="6"
-						HorizontalAlignment="Left"
-						Margin="9,0,0,0">
-					<Grid>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="15" />
-							<ColumnDefinition Width="*" />
-							<ColumnDefinition Width="15" />
-						</Grid.ColumnDefinitions>
-						
-						<Image Grid.Column="0"
-							   Source="../Resources/PokedexPokeball.png" />
-						
-						<TextBlock Grid.Column="1"
-								   Margin="7,0,7,0"
-								   Style="{StaticResource GlobalTextBlockStyle}"
-								   Text="HELLO WORLD" />
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
 
-						<Image Grid.Column="2"
-							   Source="../Resources/PokedexPokeball.png" />
-					</Grid>
-				</Border>
-			</Border>
-		</Border>
-		
-		<Grid Grid.Row="1"
-			  Grid.Column="0">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="20" />
-				<RowDefinition Height="2*" />
-				<RowDefinition Height="1*" />
-				<RowDefinition Height="2*" />
-				<RowDefinition Height="20" />
-				<RowDefinition Height="*" />
-			</Grid.RowDefinitions>
+		<controls:TypeIcon Grid.Row="0"
+						   Grid.Column="0"
+						   Type="{Binding CurrentQuestion.AttackingType}"
+						   Margin="0,0,30,0"
+						   HorizontalAlignment="Right" />
+
+		<controls:TypeIcon Grid.Row="1"
+						   Grid.Column="1"
+						   Type="{Binding CurrentQuestion.DefendingType}"
+						   Margin="30,0,0,0"
+						   HorizontalAlignment="Left" />
+
+		<Grid Grid.Row="3"
+			  Grid.Column="0"
+			  Grid.ColumnSpan="2">
 
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*" />
@@ -92,50 +67,31 @@
 				<ColumnDefinition Width="*" />
 			</Grid.ColumnDefinitions>
 
-			<controls:TypeIcon Grid.Row="1"
-							   Grid.Column="0"
-							   Grid.ColumnSpan="4"
-							   Type="{Binding CurrentQuestion.AttackingType}" />
+			<controls:AnswerButton Grid.Column="0"
+								   Command="{Binding SubmitAnswerCommand}"
+								   CommandParameter="{x:Static pokemon:Effectiveness.None}"
+								   Text="{Binding Source={x:Static pokemon:Effectiveness.None}, Converter={StaticResource EnumToStringConverter}}" />
 
-			<Label Grid.Row="2"
-				   Grid.Column="0"
-				   Grid.ColumnSpan="4"
-				   HorizontalContentAlignment="Center"
-				   VerticalContentAlignment="Center">x</Label>
-			
-			<controls:TypeIcon Grid.Row="3"
-							   Grid.Column="0"
-							   Grid.ColumnSpan="4"
-							   Type="{Binding CurrentQuestion.DefendingType}" />
+			<controls:AnswerButton Grid.Column="1"
+								   Command="{Binding SubmitAnswerCommand}"
+								   CommandParameter="{x:Static pokemon:Effectiveness.Half}"
+								   Text="{Binding Source={x:Static pokemon:Effectiveness.Half}, Converter={StaticResource EnumToStringConverter}}" />
 
-			<Button Grid.Row="4"
-					Grid.Column="0"
-					Command="{Binding SubmitAnswerCommand}"
-					CommandParameter="{x:Static pokemon:Effectiveness.None}"
-					Content="{Binding Source={x:Static pokemon:Effectiveness.None}, Converter={StaticResource EnumToStringConverter}}" />
+			<controls:AnswerButton Grid.Column="2"
+								   Command="{Binding SubmitAnswerCommand}"
+								   CommandParameter="{x:Static pokemon:Effectiveness.Normal}"
+								   Text="{Binding Source={x:Static pokemon:Effectiveness.Normal}, Converter={StaticResource EnumToStringConverter}}" />
 
-			<Button Grid.Row="4"
-					Grid.Column="1"
-					Command="{Binding SubmitAnswerCommand}"
-					CommandParameter="{x:Static pokemon:Effectiveness.Half}"
-					Content="{Binding Source={x:Static pokemon:Effectiveness.Half}, Converter={StaticResource EnumToStringConverter}}" />
-
-			<Button Grid.Row="4"
-					Grid.Column="2"
-					Command="{Binding SubmitAnswerCommand}"
-					CommandParameter="{x:Static pokemon:Effectiveness.Normal}"
-					Content="{Binding Source={x:Static pokemon:Effectiveness.Normal}, Converter={StaticResource EnumToStringConverter}}" />
-
-			<Button Grid.Row="4"
-					Grid.Column="3"
-					Command="{Binding SubmitAnswerCommand}"
-					CommandParameter="{x:Static pokemon:Effectiveness.Double}"
-					Content="{Binding Source={x:Static pokemon:Effectiveness.Double}, Converter={StaticResource EnumToStringConverter}}" />
+			<controls:AnswerButton Grid.Column="3"
+								   Command="{Binding SubmitAnswerCommand}"
+								   CommandParameter="{x:Static pokemon:Effectiveness.Double}"
+								   Text="{Binding Source={x:Static pokemon:Effectiveness.Double}, Converter={StaticResource EnumToStringConverter}}" />
 		</Grid>
 
 		<Border x:Name="BottomBar"
-				Grid.Row="2"
+				Grid.Row="4"
 				Grid.Column="0"
+				Grid.ColumnSpan="2"
 				Background="#5068e8"
 				BorderBrush="#505050"
 				BorderThickness="0,2,0,0"
@@ -162,6 +118,7 @@
 						<RowDefinition Height="4" />
 						<RowDefinition Height="*" />
 					</Grid.RowDefinitions>
+
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="3" />
 						<ColumnDefinition Width="4" />
@@ -197,86 +154,75 @@
 					<Rectangle Grid.Row="1"
 							   Grid.Column="3"
 							   Fill="#3040b8" />
-				</Grid>
-			</Border>
-		</Border>
 
-		<Border x:Name="Sidebar"
-				Grid.Row="0"
-				Grid.RowSpan="3"
-				Grid.Column="1"
-				Background="#7890e0"
-				BorderBrush="#3040b8"
-				BorderThickness="2,0,0,0"
-				SnapsToDevicePixels="True">
-			<Border x:Name="SidebarInner"
-					BorderBrush="#a8b8f0"
-					BorderThickness="1,0,0,0">
-				<ItemsControl ItemsSource="{Binding AnswerHistory}"
-							  SnapsToDevicePixels="True">
-					<ItemsControl.ItemTemplate>
-						<DataTemplate DataType="components:QuestionAndAnswer">
-							<Border x:Name="AnswerHistorySeparator"
-									Background="{Binding WasUserCorrect, Converter={StaticResource UserAnswerToBackgroundBrushConverter}}"
-									BorderThickness="0,1,0,0"
-									BorderBrush="Black"
-									Padding="3"
-									SnapsToDevicePixels="True"
-									Height="70">
-								<Grid SnapsToDevicePixels="True">
-									<Grid.RowDefinitions>
-										<RowDefinition Height="*" />
-										<RowDefinition Height="*" />
-									</Grid.RowDefinitions>
-									<Grid.ColumnDefinitions>
-										<ColumnDefinition Width="*" />
-										<ColumnDefinition Width="*" />
-									</Grid.ColumnDefinitions>
+					<ItemsControl Grid.Row="2"
+								  Grid.Column="0"
+								  ItemsSource="{Binding AnswerHistory}"
+								  SnapsToDevicePixels="True">
+						<ItemsControl.ItemTemplate>
+							<DataTemplate DataType="components:QuestionAndAnswer">
+								<Border x:Name="AnswerHistorySeparator"
+										Background="{Binding WasUserCorrect, Converter={StaticResource UserAnswerToBackgroundBrushConverter}}"
+										BorderThickness="0,1,0,0"
+										BorderBrush="Black"
+										Padding="3"
+										SnapsToDevicePixels="True"
+										Height="70">
+									<Grid SnapsToDevicePixels="True">
+										<Grid.RowDefinitions>
+											<RowDefinition Height="*" />
+											<RowDefinition Height="*" />
+										</Grid.RowDefinitions>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="*" />
+											<ColumnDefinition Width="*" />
+										</Grid.ColumnDefinitions>
 
-									<controls:TypeIcon Grid.Row="0"
-													   Grid.Column="0"
-													   Type="{Binding AttackingType}" />
-									
-									<Image Grid.Row="1"
-										   Grid.Column="0"
-										   Source="../Resources/AttackArrow.png"
-										   Width="18"
-										   Height="18"
-										   HorizontalAlignment="Right"
-										   VerticalAlignment="Top" />
-									
-									<controls:TypeIcon Grid.Row="1"
-													   Grid.Column="1"
-													   Type="{Binding DefendingType}"
-													   VerticalAlignment="Top" />
+										<controls:TypeIcon Grid.Row="0"
+														   Grid.Column="0"
+														   Type="{Binding AttackingType}" />
 
-									<!--
+										<Image Grid.Row="1"
+											   Grid.Column="0"
+											   Source="../Resources/AttackArrow.png"
+											   Width="18"
+											   Height="18"
+											   HorizontalAlignment="Right"
+											   VerticalAlignment="Top" />
+
+										<controls:TypeIcon Grid.Row="1"
+														   Grid.Column="1"
+														   Type="{Binding DefendingType}"
+														   VerticalAlignment="Top" />
+
+										<!--
 									<TextBlock Grid.Row="2"
 											   Grid.Column="0"
 											   Text="{Binding SubmittedAnswer, Converter={StaticResource EnumToStringConverter}}"
 											   Visibility="{Binding WasUserCorrect, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
 									-->
 
-									<TextBlock Grid.Row="1"
-											   Grid.Column="0"
-											   Text="{Binding CorrectAnswer, Converter={StaticResource EnumToStringConverter}}"
-											   FontSize="30"
-											   HorizontalAlignment="Left"
-											   VerticalAlignment="Bottom" />
-								</Grid>
-							</Border>
+										<TextBlock Grid.Row="1"
+												   Grid.Column="0"
+												   Text="{Binding CorrectAnswer, Converter={StaticResource EnumToStringConverter}}"
+												   FontSize="30"
+												   HorizontalAlignment="Left"
+												   VerticalAlignment="Bottom" />
+									</Grid>
+								</Border>
 
-							<DataTemplate.Triggers>
-								<DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}"
-											 Value="{x:Null}">
-									<Setter TargetName="AnswerHistorySeparator"
-											Property="BorderBrush"
-											Value="Transparent" />
-								</DataTrigger>
-							</DataTemplate.Triggers>
-						</DataTemplate>
-					</ItemsControl.ItemTemplate>
-				</ItemsControl>
+								<DataTemplate.Triggers>
+									<DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}"
+												 Value="{x:Null}">
+										<Setter TargetName="AnswerHistorySeparator"
+												Property="BorderBrush"
+												Value="Transparent" />
+									</DataTrigger>
+								</DataTemplate.Triggers>
+							</DataTemplate>
+						</ItemsControl.ItemTemplate>
+					</ItemsControl>
+				</Grid>
 			</Border>
 		</Border>
 	</Grid>

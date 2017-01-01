@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="TrainersSchool.Controls.AnswerButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:TrainersSchool.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+			 x:Name="AnswerButtonUserControl">
+	<UserControl.Resources>
+		<ImageBrush x:Key="BackgroundImageBrush"
+					ImageSource="/TrainersSchool;component/Resources/AnswerButtonBackground.png"
+					Stretch="Uniform" />
+		<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+	</UserControl.Resources>
+	
+    <Viewbox Stretch="Uniform">
+		<Border Width="124"
+				Height="55"
+				MouseDown="OnMouseDown"
+				BorderThickness="0"
+				Background="{StaticResource BackgroundImageBrush}"
+				Cursor="Hand">
+			<Grid>
+				<controls:AnswerButtonCorner HorizontalAlignment="Left"
+											 VerticalAlignment="Top"
+											 Visibility="{Binding IsMouseOver, ElementName=AnswerButtonUserControl, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+				<controls:AnswerButtonCorner HorizontalAlignment="Right"
+											 VerticalAlignment="Top"
+											 Rotation="90"
+											 Visibility="{Binding IsMouseOver, ElementName=AnswerButtonUserControl, Converter={StaticResource BooleanToVisibilityConverter}}" />
+				<controls:AnswerButtonCorner HorizontalAlignment="Right"
+											 VerticalAlignment="Bottom"
+											 Rotation="180"
+											 Visibility="{Binding IsMouseOver, ElementName=AnswerButtonUserControl, Converter={StaticResource BooleanToVisibilityConverter}}" />
+				<controls:AnswerButtonCorner HorizontalAlignment="Left"
+											 VerticalAlignment="Bottom"
+											 Rotation="270"
+											 Visibility="{Binding IsMouseOver, ElementName=AnswerButtonUserControl, Converter={StaticResource BooleanToVisibilityConverter}}" />
+				
+				<Label Content="{Binding Text, ElementName=AnswerButtonUserControl}"
+					   HorizontalContentAlignment="Center"
+					   VerticalContentAlignment="Center" />
+			</Grid>
+		</Border>
+    </Viewbox>
+</UserControl>

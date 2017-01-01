@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="TrainersSchool.Controls.Pokeball"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+	<UserControl.Resources>
+		<system:Double x:Key="OutlineThickness">6</system:Double>
+		<SolidColorBrush x:Key="OutlineColor"
+						 Color="#2d2d2d" />
+	</UserControl.Resources>
+	
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+		
+		<Ellipse x:Name="BackgroundFill"
+				 Grid.Row="0"
+				 Grid.RowSpan="2"
+				 Fill="White" />
+
+		<Path x:Name="RedHalf"
+			  Grid.Row="0"
+			  Stretch="Uniform"
+			  Data="M-0,0a2,2 0 1,0 -4,0"
+			  Fill="#F86060" />
+
+		<Ellipse x:Name="Outline"
+				 Grid.Row="0"
+				 Grid.RowSpan="2"
+				 Stroke="{StaticResource OutlineColor}"
+				 StrokeThickness="{StaticResource OutlineThickness}" />
+
+		<Path x:Name="HorizontalLine"
+			  Grid.Row="0"
+			  Grid.RowSpan="2"
+			  Stroke="{StaticResource OutlineColor}"
+			  Data="M0,1 L1,1"
+			  Stretch="Uniform"
+			  StrokeThickness="{StaticResource OutlineThickness}" />
+
+		<Ellipse x:Name="CenterCircle"
+				 Grid.Row="0"
+				 Grid.RowSpan="2"
+				 Stroke="{StaticResource OutlineColor}"
+				 StrokeThickness="{StaticResource OutlineThickness}"
+				 Fill="White"
+				 Stretch="Uniform"
+				 Width="100"
+				 Height="100" />
+		
+		<Ellipse x:Name="CenterButton"
+				 Grid.Row="0"
+				 Grid.RowSpan="2"
+				 Fill="{StaticResource OutlineColor}"
+				 Stretch="Uniform"
+				 Width="40"
+				 Height="40" />
+	</Grid>
+</UserControl>
