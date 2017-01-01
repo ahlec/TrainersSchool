@@ -8,11 +8,12 @@
 			 xmlns:pokemon="clr-namespace:TrainersSchool.Pokemon"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-			 Background="#008080"
 			 SnapsToDevicePixels="True"
 			 mc:Ignorable="d"
 			 d:DesignHeight="700"
-			 d:DesignWidth="1000">
+			 d:DesignWidth="1000"
+			 Background="#3d3d3d"
+			 FocusManager.FocusedElement="{x:Reference NormalEffectivenessButton}">
 	<UserControl.DataContext>
 		<viewModels:SessionViewModel />
 	</UserControl.DataContext>
@@ -28,70 +29,119 @@
 											FalseBrush="Red" />
 	</UserControl.Resources>
 
-	<Grid SnapsToDevicePixels="True"
-		  Margin="20">
+	<Grid SnapsToDevicePixels="True">
 		<Grid.RowDefinitions>
-			<RowDefinition Height="100" />
-			<RowDefinition Height="100" />
-			<RowDefinition Height="20" />
-			<RowDefinition Height="80" />
-			<RowDefinition Height="*" />
-			<RowDefinition Height="46" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
+		
+		<Grid x:Name="MatchupDisplay"
+			  Grid.Row="0"
+			  Grid.Column="0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="30" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="30" />
+			</Grid.RowDefinitions>
 
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="*" />
-		</Grid.ColumnDefinitions>
+			<controls:VsBackground Grid.Row="1"
+								   Grid.Column="0">
+				<controls:TypeIcon Type="{Binding CurrentQuestion.DefendingType}" />
+			</controls:VsBackground>
 
-		<controls:TypeIcon Grid.Row="0"
-						   Grid.Column="0"
-						   Type="{Binding CurrentQuestion.AttackingType}"
-						   Margin="0,0,30,0"
-						   HorizontalAlignment="Right" />
+			<Image Grid.Row="2"
+				   Grid.Column="0"
+				   Source="/TrainersSchool;component/Resources/VS.png"
+				   Height="34"
+				   Margin="0,6,0,6" />
 
-		<controls:TypeIcon Grid.Row="1"
-						   Grid.Column="1"
-						   Type="{Binding CurrentQuestion.DefendingType}"
-						   Margin="30,0,0,0"
-						   HorizontalAlignment="Left" />
-
-		<Grid Grid.Row="3"
-			  Grid.Column="0"
-			  Grid.ColumnSpan="2">
-
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="*" />
-			</Grid.ColumnDefinitions>
-
-			<controls:AnswerButton Grid.Column="0"
-								   Command="{Binding SubmitAnswerCommand}"
-								   CommandParameter="{x:Static pokemon:Effectiveness.None}"
-								   Text="{Binding Source={x:Static pokemon:Effectiveness.None}, Converter={StaticResource EnumToStringConverter}}" />
-
-			<controls:AnswerButton Grid.Column="1"
-								   Command="{Binding SubmitAnswerCommand}"
-								   CommandParameter="{x:Static pokemon:Effectiveness.Half}"
-								   Text="{Binding Source={x:Static pokemon:Effectiveness.Half}, Converter={StaticResource EnumToStringConverter}}" />
-
-			<controls:AnswerButton Grid.Column="2"
-								   Command="{Binding SubmitAnswerCommand}"
-								   CommandParameter="{x:Static pokemon:Effectiveness.Normal}"
-								   Text="{Binding Source={x:Static pokemon:Effectiveness.Normal}, Converter={StaticResource EnumToStringConverter}}" />
-
-			<controls:AnswerButton Grid.Column="3"
-								   Command="{Binding SubmitAnswerCommand}"
-								   CommandParameter="{x:Static pokemon:Effectiveness.Double}"
-								   Text="{Binding Source={x:Static pokemon:Effectiveness.Double}, Converter={StaticResource EnumToStringConverter}}" />
+			<controls:VsBackground Grid.Row="3"
+								   Grid.Column="0">
+				<controls:TypeIcon Type="{Binding CurrentQuestion.AttackingType}" />
+			</controls:VsBackground>
 		</Grid>
 
-		<Border x:Name="BottomBar"
-				Grid.Row="4"
+		<Border Grid.Row="1"
 				Grid.Column="0"
-				Grid.ColumnSpan="2"
+				BorderThickness="0,1,0,0"
+				BorderBrush="Black">
+			<Border.Background>
+				<LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+					<GradientStop Color="#c6c6c6"
+								  Offset="0" />
+					<GradientStop Color="#c6c6c6"
+								  Offset="0.03" />
+					<GradientStop Color="White"
+								  Offset="0.05" />
+					<GradientStop Color="White"
+								  Offset="0.95" />
+					<GradientStop Color="#c6c6c6"
+								  Offset="0.97" />
+					<GradientStop Color="#c6c6c6"
+								  Offset="1" />
+				</LinearGradientBrush>
+			</Border.Background>
+
+			<Grid Margin="10">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="20" />
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="20" />
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="20" />
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+
+				<controls:AnswerButton x:Name="NoEffectivenessButton"
+									   Grid.Column="1"
+									   Command="{Binding SubmitAnswerCommand}"
+									   CommandParameter="{x:Static pokemon:Effectiveness.None}"
+									   VerticalAlignment="Top"
+									   Text="{Binding Source={x:Static pokemon:Effectiveness.None}, Converter={StaticResource EnumToStringConverter}}"
+									   PreviousButton="{x:Reference DoubleEffectivenessButton}"
+									   NextButton="{x:Reference HalfEffectivenessButton}" />
+
+				<controls:AnswerButton x:Name="HalfEffectivenessButton"
+									   Grid.Column="3"
+									   Command="{Binding SubmitAnswerCommand}"
+									   CommandParameter="{x:Static pokemon:Effectiveness.Half}"
+									   VerticalAlignment="Top"
+									   Margin="0,20,0,0"
+									   Text="{Binding Source={x:Static pokemon:Effectiveness.Half}, Converter={StaticResource EnumToStringConverter}}"
+									   PreviousButton="{x:Reference NoEffectivenessButton}"
+									   NextButton="{x:Reference NormalEffectivenessButton}" />
+
+				<controls:AnswerButton x:Name="NormalEffectivenessButton"
+									   Grid.Column="5"
+									   Command="{Binding SubmitAnswerCommand}"
+									   CommandParameter="{x:Static pokemon:Effectiveness.Normal}"
+									   VerticalAlignment="Top"
+									   Margin="0,20,0,0"
+									   Text="{Binding Source={x:Static pokemon:Effectiveness.Normal}, Converter={StaticResource EnumToStringConverter}}"
+									   PreviousButton="{x:Reference HalfEffectivenessButton}"
+									   NextButton="{x:Reference DoubleEffectivenessButton}" />
+
+				<controls:AnswerButton x:Name="DoubleEffectivenessButton"
+									   Grid.Column="7"
+									   Command="{Binding SubmitAnswerCommand}"
+									   CommandParameter="{x:Static pokemon:Effectiveness.Double}"
+									   VerticalAlignment="Top"
+									   Text="{Binding Source={x:Static pokemon:Effectiveness.Double}, Converter={StaticResource EnumToStringConverter}}"
+									   PreviousButton="{x:Reference NormalEffectivenessButton}"
+									   NextButton="{x:Reference NoEffectivenessButton}" />
+			</Grid>
+		</Border>
+		
+
+		<Border x:Name="BottomBar"
+				Grid.Row="2"
+				Grid.Column="0"
 				Background="#5068e8"
 				BorderBrush="#505050"
 				BorderThickness="0,2,0,0"

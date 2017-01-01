@@ -72,6 +72,10 @@
     <Compile Include="Controls\TypeIcon.xaml.cs">
       <DependentUpon>TypeIcon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\VsBackground.xaml.cs">
+      <DependentUpon>VsBackground.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\AnyBooleanTrueConverter.cs" />
     <Compile Include="Converters\BooleanToBrushConverter.cs" />
     <Compile Include="Converters\CompositeConverter.cs" />
     <Compile Include="Converters\EnumToStringConverter.cs" />
@@ -99,6 +103,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\TypeIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\VsBackground.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -167,6 +175,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\AnswerButtonHoverCorner.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\VSBackground.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\VS.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -12,17 +12,29 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TrainersSchool.Controls;
 
 namespace TrainersSchool.Views
 {
-	/// <summary>
-	/// Interaction logic for SessionView.xaml
-	/// </summary>
-	public partial class SessionView : UserControl
+	public partial class SessionView
 	{
 		public SessionView()
 		{
 			InitializeComponent();
+		}
+
+		protected override void OnKeyDown( KeyEventArgs e )
+		{
+			AnswerButton button = (AnswerButton) FocusManager.GetFocusedElement( this );
+			if ( e.Key == Key.Left || e.Key == Key.A )
+			{
+				button.PreviousButton.Focus();
+			}
+			else if ( e.Key == Key.Right || e.Key == Key.D )
+			{
+				button.NextButton.Focus();
+			}
+			base.OnKeyDown( e );
 		}
 	}
 }
