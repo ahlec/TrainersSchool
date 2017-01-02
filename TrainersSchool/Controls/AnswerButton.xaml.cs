@@ -65,6 +65,30 @@ namespace TrainersSchool.Controls
 			base.OnMouseEnter( e );
 		}
 
+		protected override void OnGotFocus( RoutedEventArgs e )
+		{
+			Keyboard.Focus( this );
+			base.OnGotFocus( e );
+		}
+
+		protected override void OnKeyDown( KeyEventArgs e )
+		{
+			if ( e.Key == Key.Left || e.Key == Key.A )
+			{
+				PreviousButton.Focus();
+			}
+			else if ( e.Key == Key.Right || e.Key == Key.D )
+			{
+				NextButton.Focus();
+			}
+			else if ( e.Key == Key.Enter || e.Key == Key.Space )
+			{
+				Invoke();
+			}
+
+			base.OnKeyDown( e );
+		}
+
 		private void Invoke()
 		{
 			ICommand command = Command;
@@ -78,6 +102,11 @@ namespace TrainersSchool.Controls
 			{
 				command.Execute( parameter );
 			}
+		}
+
+		public override string ToString()
+		{
+			return CommandParameter.ToString();
 		}
 	}
 }

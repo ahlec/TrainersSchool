@@ -22,19 +22,5 @@ namespace TrainersSchool.Views
 		{
 			InitializeComponent();
 		}
-
-		protected override void OnKeyDown( KeyEventArgs e )
-		{
-			AnswerButton button = (AnswerButton) FocusManager.GetFocusedElement( this );
-			if ( e.Key == Key.Left || e.Key == Key.A )
-			{
-				button.PreviousButton.Focus();
-			}
-			else if ( e.Key == Key.Right || e.Key == Key.D )
-			{
-				button.NextButton.Focus();
-			}
-			base.OnKeyDown( e );
-		}
 	}
 }

@@ -75,9 +75,9 @@
     <Compile Include="Controls\VsBackground.xaml.cs">
       <DependentUpon>VsBackground.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\AnyBooleanTrueConverter.cs" />
     <Compile Include="Converters\BooleanToBrushConverter.cs" />
     <Compile Include="Converters\CompositeConverter.cs" />
+    <Compile Include="Converters\DebugConverter.cs" />
     <Compile Include="Converters\EnumToStringConverter.cs" />
     <Compile Include="Converters\InvertBooleanConverter.cs" />
     <Compile Include="Converters\IsInt32EqualConverter.cs" />

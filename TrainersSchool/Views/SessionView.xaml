@@ -13,7 +13,8 @@
 			 d:DesignHeight="700"
 			 d:DesignWidth="1000"
 			 Background="#3d3d3d"
-			 FocusManager.FocusedElement="{x:Reference NormalEffectivenessButton}">
+			 FocusManager.FocusedElement="{x:Reference NormalEffectivenessButton}"
+			 KeyboardNavigation.TabNavigation="None">
 	<UserControl.DataContext>
 		<viewModels:SessionViewModel />
 	</UserControl.DataContext>
